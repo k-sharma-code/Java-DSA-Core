@@ -1,45 +1,20 @@
-# Java DSA Core — Structured Learning Repository
+#  Java DSA Core
 
-##  Purpose
-This repository documents my structured journey to master **Java** and **Data Structures & Algorithms (DSA)**.  
-It focuses on **clean code, strong fundamentals, optimized solutions, and clear documentation**.
+This repository documents my journey through Data Structures and Algorithms. My focus is on writing clean, professional code and mastering the logic behind every problem.
 
-The goal is to build **problem-solving ability**, **interview readiness**, and **deep conceptual understanding**.
+##  My Learning Progress
 
----
-
-##  Repository Structure
-
--  **Basic/**  
-  Core Java concepts, OOP, Exception Handling, Collections, and Design Patterns.
-
--  **Data-Structures/**  
-  Arrays, Strings, Linked Lists, Stacks, Queues, Trees, Graphs, and Hashing.
-
--  **Algorithms/**  
-  Sorting, Searching, Recursion, Dynamic Programming, Greedy, Backtracking, and Graph Algorithms.
+| Module                   | Core Logic & Patterns | Problems | Status |
+|:-------------------------| :--- | :--- | :--- |
+|  [Arrays](./src/Arrays/) | Logic Optimization & Array Mechanics | 01 / 15 | 🟢 Active |
+|  [Basic](./src/Basic/) | Java Fundamentals & Core Syntax | -- | 🟡 Ongoing |
 
 ---
 
-##  Tech Stack
-- **Language:** Java 17+
-- **IDE:** IntelliJ IDEA / VS Code
-- **Version Control:** Git & GitHub
+###  Engineering Standards
+* **Efficiency:** Focus on optimal Time and Space complexity for every solution.
+* **Documentation:** Clear explanations of intuition and algorithms.
+* **Scalability:** Systematically updating progress as I solve more problems.
 
 ---
-
-##  Documentation Standard
-Each folder contains a dedicated `README.md` with:
-1. Problem Explanation
-2. Approach & Logic
-3. Code Implementation
-4. Time & Space Complexity
-5. Example Inputs & Outputs
-
----
-
-##  Objective
-To build a **high-quality DSA portfolio** that reflects:
-- Strong fundamentals
-- Clean coding practices
-- Interview-ready problem solving
+*Last Updated: February 2026*
