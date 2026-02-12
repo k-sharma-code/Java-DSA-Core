@@ -1,13 +1,13 @@
-# 🏛 Array Masterclass: Logic & Optimization
+#  Array Masterclass: Logic & Optimization
 
 A collection of high-performance Array solutions. Each problem is solved with a focus on **Edge-Case Stability** and **Optimal Complexity**.
 
 ##  Problem Directory
-| # | Problems                | Difficulty | Pattern | Documentation |
-|---|-------------------------|------------|-------------|--------------|
-| 01 | Maximum Product Subarray | Medium | Dual-State Tracking | [View Details](#01-maximum-product-subarray) |
-| 02 | Next Permutation        | Medium | Lexicographical Swap |  In-Progress |
-| 03 | Trapping Rain Water     | Hard | Two-Pointer |  Planned |
+| # | Problems                                              | Difficulty | Pattern | Documentation                                |
+|---|-------------------------------------------------------|------------|-------------|----------------------------------------------|
+| 01 | [Maximum Product Subarray](./MaxProductSubarray.java) | Medium | Dual-State Tracking | [View Details](#01-maximum-product-subarray) |
+| 02 | [Next Permutation](./NextPermutation.java)            | Medium | Lexicographical Swap | [View details](#02-next-permutation)         |
+| 03 | Trapping Rain Water                                   | Hard | Two-Pointer | Planned                                      |
 
 ---
 
@@ -37,4 +37,29 @@ A collection of high-performance Array solutions. Each problem is solved with a 
 - **Input:** `[2, 3, -2, 4]` ⮕ **Output:** `6`
 - **Input:** `[-2, -1, -3]` ⮕ **Output:** `3`
 
+
+
 ---
+
+## 02. Next Permutation
+
+**Problem:** Implement the function that rearranges numbers into the lexicographically next greater permutation. If no such arrangement is possible (i.e., the array is sorted in descending order), it must rearrange it as the lowest possible order (i.e., sorted in ascending order).
+
+**Intuition:** The next larger sequence is found by identifying the rightmost "dip" (pivot) where the increasing sequence from the right breaks, swapping it with its next greater successor, and reversing the suffix to minimize the increment.
+
+**Algorithm:**
+1. **Find Pivot:** Scan from right to find index `i` such that `nums[i] < nums[i+1]`.
+2. **Find Successor:** If `pivot != -1`, find index `j` from right such that `nums[j] > nums[pivot]`.
+3. **Swap & Reverse:** Swap `nums[pivot]` with `nums[j]` and reverse the suffix starting from `pivot + 1`.
+
+**Complexity:**
+- **Time:** $O(N)$ (At most three linear passes)
+- **Space:** $O(1)$ (In-place operations)
+
+**Example:**
+- **Input:** `[1, 2, 3]` → **Output:** `[1, 3, 2]`
+- **Input:** `[3, 2, 1]` → **Output:** `[1, 2, 3]`
+
+**What I Learned:**
+- I got to know manual implementation of lexicographical logic without built-in helpers.
+- Practiced clean encapsulation using `private static` helper methods for `swap` and `reverse`.
