@@ -11,7 +11,7 @@ This repository contains optimized sorting algorithms implemented in Java, focus
 
 ---
 
-## ️ 01. Bubble Sort
+##  01. Bubble Sort
 
 ###  Problem Statement:
 Sort an array `nums` of size `n` in non-decreasing order. The implementation must detect if the input is already sorted to achieve $O(N)$ time complexity.
