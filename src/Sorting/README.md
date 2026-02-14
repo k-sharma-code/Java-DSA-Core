@@ -4,10 +4,10 @@ This repository contains optimized sorting algorithms implemented in Java, focus
 
 ##  Problem Directory:
 
-| # | Algorithm | Difficulty | Optimization | Documentation |
-| :--- | :--- | :--- | :--- | :--- |
-| **01** | [Bubble Sort](./BubbleSort.java) | Easy | Dual-State Early Exit | [View Details](#-01-bubble-sort) |
-| **02** | Selection Sort | Easy | *TBD* | *Planned* |
+| # | Algorithm | Difficulty | Optimization | Documentation                   |
+| :--- | :--- | :--- | :--- |:--------------------------------|
+| **01** | [Bubble Sort](./BubbleSort.java) | Easy | Dual-State Early Exit | [View Details](#01-bubble-sort) |
+| **02** | Selection Sort | Easy | *TBD* | *Planned*                       |
 
 ---
 
