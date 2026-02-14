@@ -4,10 +4,11 @@ This repository documents my journey through Data Structures and Algorithms. My 
 
 ##  My Learning Progress
 
-| Module                   | Core Logic & Patterns | Problems | Status |
-|:-------------------------| :--- | :--- | :--- |
-|  [Arrays](./src/Arrays/) | Logic Optimization & Array Mechanics | 01 / 15 | 🟢 Active |
-|  [Basic](./src/Basic/) | Java Fundamentals & Core Syntax | -- | 🟡 Ongoing |
+| Module                   | Core Logic & Patterns                | Problems | Status |
+|:-------------------------|:-------------------------------------|:---------|:-------|
+| [Basic](./src/Basic/)    | Java Fundamentals & Core Syntax      | --       | Ongoing |
+| [Arrays](./src/Arrays/)  | Logic Optimization & Array Mechanics | 01 / 15  | Active |
+| [Sorting](./src/Sorting/)| Performance Tuning & Data Integrity  | 01 / 10  | Active |
 
 ---
 
