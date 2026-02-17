@@ -8,6 +8,7 @@ This repository contains optimized sorting algorithms implemented in Java, focus
 |:---|:---------------------------------------| :--- |:----------------------|:-----------------------------------|
 | 01 | [Bubble Sort](./BubbleSort.java)       | Easy | Dual-State Early Exit | [View Details](#01-bubble-sort)    |
 | 02 | [Selection Sort](./SelectionSort.java) | Easy | Defensive Early Exit  | [view Details](#02-selection-sort) |
+| 03 | [Insertion Sort](./InsertionSort.java) | Easy | State Detection  | [view Details](#03-insertion-sort) |
 
 ---
 
@@ -95,5 +96,45 @@ Sorted array = 1 2 4 .
 - The algorithm uses very few swaps (one per pass).
 - Correct loop boundaries are important to avoid index errors.
 - Selection Sort is unstable since swaps can change the order of equal elements.
+
+---
+
+## 03. Insertion Sort
+
+### Problem Statement
+Implement a sorting algorithm that builds a sorted array by repeatedly inserting each element into its correct position using shifting. The program should also detect if the input was already sorted and notify the user accordingly.
+
+### Intuition
+This algorithm works like sorting playing cards in your hand. We pick an element (current) and compare it with the previous ones. If the previous element is larger, we shift it to the right. A shifted boolean flag is used to detect whether the inner loop runs at least once, it means the array was not pre-sorted.
+
+### Algorithm
+1. **Outer Loop:** Starts from index 1 to $n-1$.
+2. **Value Capture:** Store `nums[i]` in a `current` variable to avoid losing it during shifting.
+3. **Condition Check:** While the previous element is greater than `current`:
+    - Shift the larger element one position to the right (`nums[prev + 1] = nums[prev]`).
+    - Set `shifted = true` to mark that the array needed sorting.
+4. **Placement:** Insert `current` into its correct position.
+
+
+
+### Complexity Analysis
+- **Time Complexity:**
+    - **Best Case:** $O(n)$ (When the array is already sorted, the `while` loop condition is never met).
+    - **Worst Case:** $O(n^2)$ (When the array is in reverse order).
+- **Space Complexity:** $O(1)$ (In-place sorting).
+
+### Example & Output
+**Input:** `[3, 1, 4, 2]`
+- `i=1`: 3 > 1 (Shift 3, `shifted=true`). Array: `[1, 3, 4, 2]`
+- `i=2`: 3 < 4 (No shift).
+- `i=3`: 4 > 2, 3 > 2 (Shift 4 and 3). Array: `[1, 2, 3, 4]`
+
+**Console Output:**
+Array was not sorted, now sorted:
+Sorted array = 1 2 3 4
+
+### what I learned
+- Insertion sort works by inserting elements into their correct position through shifting.
+- A state flag can be used to identify if sorting was actually required.
 
 
