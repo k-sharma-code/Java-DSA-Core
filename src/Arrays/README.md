@@ -3,11 +3,12 @@
 A collection of high-performance Array solutions. Each problem is solved with a focus on **Edge-Case Stability** and **Optimal Complexity**.
 
 ##  Problem Directory
-| # | Problems                                              | Difficulty | Pattern                   | Documentation                                |
-|---|-------------------------------------------------------|------------|---------------------------|----------------------------------------------|
-| 01 | [Maximum Product Subarray](./MaxProductSubarray.java) | Medium | Dual-State Tracking       | [View Details](#01-maximum-product-subarray) |
-| 02 | [Next Permutation](./NextPermutation.java)            | Medium | Lexicographical Swap      | [View Details](#02-next-permutation)         |
-| 03 | [Trapping Rain Water](./TrappingRainWater.java)       | Hard | Prefix-Suffix/Two-Pointer | [View Details](#03-trapping-rain-water)      |
+| #  | Problems                                              | Difficulty | Pattern                   | Documentation                                    |
+|----|-------------------------------------------------------|------------|---------------------------|--------------------------------------------------|
+| 01 | [Maximum Product Subarray](./MaxProductSubarray.java) | Medium | Dual-State Tracking       | [View Details](#01-maximum-product-subarray)     |
+| 02 | [Next Permutation](./NextPermutation.java)            | Medium | Lexicographical Swap      | [View Details](#02-next-permutation)             |
+| 03 | [Trapping Rain Water](./TrappingRainWater.java)       | Hard | Prefix-Suffix/Two-Pointer | [View Details](#03-trapping-rain-water)          |
+| 04 | [Product Of Array Except Self](./ProdOfArrayExceptSelf.java)   | Hard | Prefix-Suffix  | [View Details](#04-product-of-array-except-self) |
 
 ---
 
@@ -31,7 +32,7 @@ A collection of high-performance Array solutions. Each problem is solved with a 
 - **Time:** $O(N)$ — Single pass through the array.
 - **Space:** $O(1)$ — Constant space, no extra arrays used.
 
-### Example Trace:
+### Example :
 - **Input:** `[2, 3, -2, 4]` ⮕ **Output:** `6`
 - **Input:** `[-2, -1, -3]` ⮕ **Output:** `3`
 
@@ -74,13 +75,11 @@ A collection of high-performance Array solutions. Each problem is solved with a 
 ### Problem Statement
 Given an array `height` representing an elevation map where the width of each bar is 1, calculate the total units of water it can trap after raining.
 
----
 
 ### Intuition
 The amount of water trapped at any bar is determined by the lower of the two tallest boundaries (left and right).
 - **Goal:** Achieve $O(n)$ time complexity with minimal auxiliary space.
 
----
 
 ###  Algorithm :
 
@@ -96,7 +95,6 @@ The amount of water trapped at any bar is determined by the lower of the two tal
 2.  **Key Insight:** By maintaining running `leftMax` and `rightMax`, we compute water without extra arrays.
 3.  **Movement:** Always move the pointer pointing to the smaller height to ensure the "limiting boundary" is correctly tracked.
 
----
 
 ### Complexity Analysis:
 
@@ -107,16 +105,63 @@ The amount of water trapped at any bar is determined by the lower of the two tal
 #### Approach 2: Two-Pointer
 - **Time:** $O(n)$ – Single pass through the array.
 - **Space:** $O(1)$ – Constant space, no extra arrays used.
-
----
+- 
 
 ### Example
 **Input:** `height = [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]`
 - **Prefix-Suffix Trace:** Computes boundaries $O(n)$ and sums water. **Output: 6**
 - **Two-Pointer Trace:** Converges pointers dynamically and sums water. **Output: 6**
 
----
 
 ###  What I Learned
 - **Space Optimization:** Successfully transitioned from $O(n)$ auxiliary space to $O(1)$ constant space.
 - **Pointer Convergence:** Learned how moving pointers based on boundary height ensures accurate trapping logic.
+
+
+---
+
+
+## 04. Product of Array Except Self
+
+### Problem Statement:
+Return an array `ans` where `ans[i]` is the product of all elements in `arr` except `arr[i]`.
+
+**Constraints:**
+- Time: $O(n)$ | Space: $O(1)$ (Auxiliary)
+- **No Division Operator.**
+
+### Intuition:
+Combining **Prefix Product** (elements to the left) and **Suffix Product** (elements to the right) in two linear passes.
+
+
+### Algorithm Approach:
+1. **Forward Pass:** Store cumulative prefix products in `result[]`.
+2. **Backward Pass:** Use a `suffix` variable to multiply existing prefix values and update on-the-fly.
+
+
+### Edge Cases:
+- **Single Zero:** `[0, 1, 2]` → `[2, 0, 0]` (Handled natively)
+- **Multiple Zeros:** `[0, 0, 2]` → `[0, 0, 0]` (No division error)
+- **Single Element:** `[1]` → `[1]` (Boundary safe)
+
+
+### Complexity:
+- **Time:** $O(n)$
+- **Auxiliary Space:** $O(1)$
+- **Total Space:** $O(n)$
+- 
+
+### Example:
+**Input:** `[1, 2, 3, 4]`
+- **Prefix:** `[1, 1, 2, 6]`
+- **Suffix Integration:** `[24, 12, 8, 6]`.
+
+### What I learned :
+- Prefix-Suffix technique to compute result without using division.
+- How to achieve O(n) time with two linear passes .
+- Space optimization by storing prefix values directly int the output array.
+- Handling edge cases with zeros naturally without special conditions.
+
+
+---
+
