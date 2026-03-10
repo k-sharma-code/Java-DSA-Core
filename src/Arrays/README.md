@@ -8,7 +8,8 @@ A collection of high-performance Array solutions. Each problem is solved with a 
 | 01 | [Maximum Product Subarray](./MaxProductSubarray.java) | Medium | Dual-State Tracking       | [View Details](#01-maximum-product-subarray)     |
 | 02 | [Next Permutation](./NextPermutation.java)            | Medium | Lexicographical Swap      | [View Details](#02-next-permutation)             |
 | 03 | [Trapping Rain Water](./TrappingRainWater.java)       | Hard | Prefix-Suffix/Two-Pointer | [View Details](#03-trapping-rain-water)          |
-| 04 | [Product Of Array Except Self](./ProdOfArrayExceptSelf.java)   | Hard | Prefix-Suffix  | [View Details](#04-product-of-array-except-self) |
+| 04 | [Product Of Array Except Self](./ProdOfArrayExceptSelf.java)   | Hard | Prefix-Suffix             | [View Details](#04-product-of-array-except-self) |
+| 05 | [Stock Buy And Sell](StockBuyAndSell.java) | easy | Greedy Approach           | [View Details](#05-stock-buy-and-sell)  |
 
 ---
 
@@ -165,3 +166,38 @@ Combining **Prefix Product** (elements to the left) and **Suffix Product** (elem
 
 ---
 
+## 05. Stock Buy And Sell
+
+### Problem Statement
+Maximize profit from a single buy-sell transaction in $O(n)$ time and $O(1)$ space.
+
+
+### Intuition
+The algorithm treats **every day as a potential Selling Day**. To maximize profit for any day $i$, we must have bought at the lowest possible price between day $0$ and $i-1$. By tracking this "Historical Minimum" (`minPrice`), we find the optimal profit in a single pass.
+
+### Algorithm Approach
+1. **Initial State:** `maxProfit = 0`, `minPrice = prices[0]`.
+2. **One-Pass Logic:** For each day's price:
+    - **Sell Today?** If `price > minPrice`, calculate profit and update `maxProfit`.
+    - **Buy Today?** Update `minPrice` if the current price is the new historical minimum.
+3. **Result:** Global `maxProfit` found in $O(n)$.
+
+
+### Complexity Analysis
+- **Time Complexity:** $O(n)$ — Single linear scan.
+- **Auxiliary Space:** $O(1)$ — Only two variables used.
+
+
+### Example
+**Input:** `[7, 1, 5, 3, 6, 4]`
+- **If Selling Day is 5 (Price 6):** Best Buy Day was 1 (Price 1). **Profit = 5**.
+- **If Selling Day is 6 (Price 4):** Best Buy Day was 1 (Price 1). **Profit = 3**.
+  **Max Profit:** `5`
+
+### What I Learned
+- **Dynamic Candidate Selection:** Every element is a candidate for "selling," compared against the best "buying" candidate from the past.
+- **Temporal Consistency:** Solved without nested loops by carrying forward the minimum state.
+- **Efficiency:** Achieved peak optimization ($O(n)$ time, $O(1)$ space).
+   
+
+---
