@@ -3,13 +3,14 @@
 A collection of high-performance Array solutions. Each problem is solved with a focus on **Edge-Case Stability** and **Optimal Complexity**.
 
 ##  Problem Directory
-| #  | Problems                                              | Difficulty | Pattern                   | Documentation                                    |
-|----|-------------------------------------------------------|------------|---------------------------|--------------------------------------------------|
-| 01 | [Maximum Product Subarray](./MaxProductSubarray.java) | Medium | Dual-State Tracking       | [View Details](#01-maximum-product-subarray)     |
-| 02 | [Next Permutation](./NextPermutation.java)            | Medium | Lexicographical Swap      | [View Details](#02-next-permutation)             |
-| 03 | [Trapping Rain Water](./TrappingRainWater.java)       | Hard | Prefix-Suffix/Two-Pointer | [View Details](#03-trapping-rain-water)          |
-| 04 | [Product Of Array Except Self](./ProdOfArrayExceptSelf.java)   | Hard | Prefix-Suffix             | [View Details](#04-product-of-array-except-self) |
-| 05 | [Stock Buy And Sell](StockBuyAndSell.java) | easy | Greedy Approach           | [View Details](#05-stock-buy-and-sell)  |
+| #  | Problems                                                     | Difficulty    | Pattern                                                   | Documentation                                    |
+|----|--------------------------------------------------------------|---------------|-----------------------------------------------------------|--------------------------------------------------|
+| 01 | [Maximum Product Subarray](./MaxProductSubarray.java)        | Medium        | Dual-State Tracking                                       | [View Details](#01-maximum-product-subarray)     |
+| 02 | [Next Permutation](./NextPermutation.java)                   | Medium        | Lexicographical Swap                                      | [View Details](#02-next-permutation)             |
+| 03 | [Trapping Rain Water](./TrappingRainWater.java)              | Hard          | Prefix-Suffix/Two-Pointer                                 | [View Details](#03-trapping-rain-water)          |
+| 04 | [Product Of Array Except Self](./ProdOfArrayExceptSelf.java) | Hard          | Prefix-Suffix                                             | [View Details](#04-product-of-array-except-self) |
+| 05 | [Stock Buy And Sell](StockBuyAndSell.java)                   | Easy          | Greedy Approach                                           | [View Details](#05-stock-buy-and-sell)           |
+| 06 | [Find The Duplicate Number ](FindDuplicateNumber.java)       | Easy - Medium | Slow-fast pointer(Floyd's cycle detection) /<br/> Hashset | [View Details](#06-find-the-duplicate-number)    |
 
 ---
 
@@ -23,7 +24,7 @@ A collection of high-performance Array solutions. Each problem is solved with a 
 ### Intuition:
    A standard Kadane’s algorithm fails here because two negative numbers can multiply to create a large positive product. I used a **Dual-State** approach, keeping track of both the maximum and minimum products at each step to handle these sign-flips.
 
-### Algorithm:**
+### Algorithm:
 1. **Variables:** I used `maxProd`, `minProd`, and `result`, all initialized to `nums[0]`.
 2. **The Swap:** If `current < 0`, I swap `maxProd` and `minProd`. This is because a small negative number becomes a large positive when multiplied by another negative.
 3. **Execution:** At each step, I update `maxProd` and `minProd` using `Math.max/min(current, current * previous)`.
@@ -199,5 +200,67 @@ The algorithm treats **every day as a potential Selling Day**. To maximize profi
 - **Temporal Consistency:** Solved without nested loops by carrying forward the minimum state.
 - **Efficiency:** Achieved peak optimization ($O(n)$ time, $O(1)$ space).
    
+
+---
+
+## 06. Find the Duplicate Number
+
+### Problem Statement
+Identify the single duplicate number in an array `nums` of $n+1$ integers where each integer is in the range $[1, n]$.
+
+
+### Constraints
+ **1 : Floyd's Cycle Detection**
+- **Array Size:** $n+1$
+- **Number Range:** $1$ to $n$
+- **Requirement:** At least one duplicate must exist.
+- **Strict Rule:** Do not modify the array; Use $O(1)$ space.
+
+ **2 : HashSet**
+- **Flexibility:** Works for any integer array.
+- **Duplicate Rule:** Duplicate may or may not exist; handles multiple duplicates.
+
+---
+
+### Intuition
+
+#### **1. Floyd's Cycle Detection**
+- **Logic:** Treat the array as a **Linked List** (index $\to$ value). A duplicate value means two different indices point to the same "node," inevitably creating a **Cycle**. The duplicate is the **Entrance Node** of that cycle.
+
+
+
+#### **2. HashSet**
+- **Logic:** Maintain a **Historical Memory** (Hash Table) of visited elements. The first element that "collides" with an existing entry in our memory is the duplicate.
+
+
+### Algorithm
+
+#### **1. Floyd's Cycle Detection**
+1. **Phase 1 (Meeting):** Initialize `slow` and `fast` at `nums[0]`. Move `slow` by 1 step and `fast` by 2 steps until they collide.
+2. **Phase 2 (Entrance):** Reset `slow` to `nums[0]`. Move both pointers 1 step at a time. The point where they meet is the duplicate number.
+
+#### **2. HashSet**
+1. Iterate through the array.
+2. For each value, check if it exists in the set.
+3. If found, return the value; else, add it to the set.
+
+
+### Complexity Analysis
+| Strategy | Time Complexity | Space Complexity |
+| :--- | :--- | :--- |
+| **Floyd's Cycle** | $O(n)$ | $O(1)$ |
+| **HashSet** | $O(n)$ | $O(n)$ |
+
+
+### Example
+**Input:** `[1, 3, 4, 2, 2]`
+- **HashSet:** Stores `1, 3, 4`. Next `2` is not in set, so added. Final `2` is already in set $\to$ **Result: 2**.
+- **Floyd's:** Pointers collide in cycle $\to$ `slow` reset $\to$ Meeting at value **2**.
+
+
+### What I Learned
+- **Virtual Linking:** Transforming array values into directed graph pointers.
+- **Mathematical Convergence:** Understanding how Phase 2 synchronization finds the cycle entrance.
+- **Efficiency Trade-off:** Choosing between absolute memory efficiency ($O(1)$) and logic simplicity ($O(n)$).
 
 ---
