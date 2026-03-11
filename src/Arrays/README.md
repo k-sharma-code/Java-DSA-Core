@@ -3,14 +3,15 @@
 A collection of high-performance Array solutions. Each problem is solved with a focus on **Edge-Case Stability** and **Optimal Complexity**.
 
 ##  Problem Directory
-| #  | Problems                                                     | Difficulty    | Pattern                                                   | Documentation                                    |
-|----|--------------------------------------------------------------|---------------|-----------------------------------------------------------|--------------------------------------------------|
-| 01 | [Maximum Product Subarray](./MaxProductSubarray.java)        | Medium        | Dual-State Tracking                                       | [View Details](#01-maximum-product-subarray)     |
-| 02 | [Next Permutation](./NextPermutation.java)                   | Medium        | Lexicographical Swap                                      | [View Details](#02-next-permutation)             |
-| 03 | [Trapping Rain Water](./TrappingRainWater.java)              | Hard          | Prefix-Suffix/Two-Pointer                                 | [View Details](#03-trapping-rain-water)          |
-| 04 | [Product Of Array Except Self](./ProdOfArrayExceptSelf.java) | Hard          | Prefix-Suffix                                             | [View Details](#04-product-of-array-except-self) |
-| 05 | [Stock Buy And Sell](StockBuyAndSell.java)                   | Easy          | Greedy Approach                                           | [View Details](#05-stock-buy-and-sell)           |
+| #  | Problems                                                     | Difficulty    | Pattern                                                 | Documentation                                    |
+|----|--------------------------------------------------------------|---------------|---------------------------------------------------------|--------------------------------------------------|
+| 01 | [Maximum Product Subarray](./MaxProductSubarray.java)        | Medium        | Dual-State Tracking                                     | [View Details](#01-maximum-product-subarray)     |
+| 02 | [Next Permutation](./NextPermutation.java)                   | Medium        | Lexicographical Swap                                    | [View Details](#02-next-permutation)             |
+| 03 | [Trapping Rain Water](./TrappingRainWater.java)              | Hard          | Prefix-Suffix/Two-Pointer                               | [View Details](#03-trapping-rain-water)          |
+| 04 | [Product Of Array Except Self](./ProdOfArrayExceptSelf.java) | Hard          | Prefix-Suffix                                           | [View Details](#04-product-of-array-except-self) |
+| 05 | [Stock Buy And Sell](StockBuyAndSell.java)                   | Easy          | Greedy Approach                                         | [View Details](#05-stock-buy-and-sell)           |
 | 06 | [Find The Duplicate Number ](FindDuplicateNumber.java)       | Easy - Medium | Slow-fast pointer(Floyd's cycle detection) /<br/> Hashset | [View Details](#06-find-the-duplicate-number)    |
+| 07 | [Book Allocation ](./BookAllocation.java)   | Hard | Binary Search on Answer + Greedy strategy               | [View Details ](#07-book-allocation) |
 
 ---
 
@@ -220,7 +221,6 @@ Identify the single duplicate number in an array `nums` of $n+1$ integers where 
 - **Flexibility:** Works for any integer array.
 - **Duplicate Rule:** Duplicate may or may not exist; handles multiple duplicates.
 
----
 
 ### Intuition
 
@@ -264,3 +264,39 @@ Identify the single duplicate number in an array `nums` of $n+1$ integers where 
 - **Efficiency Trade-off:** Choosing between absolute memory efficiency ($O(1)$) and logic simplicity ($O(n)$).
 
 ---
+
+## 07. Book Allocation
+
+### Problem statement :
+Minimize the **maximum number of pages** assigned to a student such that books are allocated contiguously among `m` students.
+
+
+### Intuition :
+Since the answer follows a **Monotonic** property (if `X` pages work, `X+1` also works), we apply **Binary Search** on the range of possible answers instead of the array itself.
+
+
+### Algorithm :
+1. **Edge Case:** If `m > n`, return `-1` (Each student needs at least one book).
+2. **Search Space:**
+    - `st` = `max(arr)` (A student must carry at least the largest book).
+    - `end` = `sum(arr)` (One student gets everything).
+3. **Binary Search Loop:**
+    - While `st <= end`:
+        - If `isValid(mid)` is **True**: `ans = mid`, search left (`end = mid - 1`).
+        - Else: Search right (`st = mid + 1`).
+4. **Validation (`isValid`):** Greedily sum pages. If `current_sum > mid`, increment student count and reset sum. Return `true` if `students <= m`.
+
+
+### Complexity Analysis :
+- **Time:** $O(N \cdot \log(\sum \text{pages}))$ — Efficient for large inputs.
+- **Space:** $O(1)$ — No extra memory used.
+
+
+### Example :
+**Input:** `[10, 20, 30, 40]`, `m = 2`  
+**Output:** `60` (Student 1: 10+20+30, Student 2: 40)
+
+
+### What I Learned :
+- Applied Binary search on answer using a monotonic search space .
+- Used Greedy Strategy to book allocation.
