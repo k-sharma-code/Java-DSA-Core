@@ -12,6 +12,7 @@ A collection of high-performance Array solutions. Each problem is solved with a 
 | 05 | [Stock Buy And Sell](StockBuyAndSell.java)                   | Easy          | Greedy Approach                                         | [View Details](#05-stock-buy-and-sell)           |
 | 06 | [Find The Duplicate Number ](FindDuplicateNumber.java)       | Easy - Medium | Slow-fast pointer(Floyd's cycle detection) /<br/> Hashset | [View Details](#06-find-the-duplicate-number)    |
 | 07 | [Book Allocation ](./BookAllocation.java)   | Hard | Binary Search on Answer + Greedy strategy               | [View Details ](#07-book-allocation) |
+| 08 | [Aggressive Cows](./AggressiveCows.java) | Hard |  Binary Search on Answer + Greedy strategy | [View Details](#08-aggressive-cows) |
 
 ---
 
@@ -300,3 +301,51 @@ Since the answer follows a **Monotonic** property (if `X` pages work, `X+1` also
 ### What I Learned :
 - Applied Binary search on answer using a monotonic search space .
 - Used Greedy Strategy to book allocation.
+
+---
+
+## 08. Aggressive Cows
+
+### Problem Statement
+Given `n` stalls at different positions and `c` aggressive cows,
+place the cows such that the **minimum distance** between any
+two cows is **as large as possible**. Return that maximum
+possible minimum distance.
+
+### Intuition
+The moment I saw this problem, it reminded me of Book Allocation —
+both problems ask us to **maximize a minimum value**, which is
+a classic sign of binary search on answer. Instead of searching
+in the array, we search for the best possible distance in a range.
+
+### Algorithm
+1. Sort the stall positions
+2. Set binary search range: `start = 1`, `end = stalls[n-1] - stalls[0]`
+3. For each `mid`, check if placing all cows with minimum
+   distance `mid` is possible using `isPossible()`
+4. In `isPossible()` — greedily place each cow at the first
+   stall that is far enough from the last placed cow
+5. If possible → save answer, search right half
+6. If not possible → search left half
+
+### Complexity Analysis
+- **Sorting:** O(n log n)
+- **Binary Search × Greedy Check:** O(log(max\_range)) × O(n) = O(n log(max\_range))
+- **Total: O(n log n + n log(max\_range))**
+
+In most cases `max_range >> n`, so the dominant term is
+**O(n log(max\_range))**.
+
+### Example
+Stalls = `[1, 2, 4, 8, 9]`, Cows = `3`  
+Search Range = `[1, 8]`
+
+- **mid = 3** → cows at `1, 4, 8` → distances `3, 4` → Possible
+- **mid = 4** → cows at `1, 8` → next required stall ≥ `12` → Not Possible
+
+**Maximum Minimum Distance = 3**
+
+### What I Learned
+- How to apply **Binary Search on Answer** instead of searching in the array
+- How to use a **greedy feasibility check (`isPossible`)** to validate a candidate distance
+- Recognizing the pattern used in problems like **Book Allocation** .
