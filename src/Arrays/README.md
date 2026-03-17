@@ -11,8 +11,9 @@ A collection of high-performance Array solutions. Each problem is solved with a 
 | 04 | [Product Of Array Except Self](./ProdOfArrayExceptSelf.java) | Hard          | Prefix-Suffix                                           | [View Details](#04-product-of-array-except-self) |
 | 05 | [Stock Buy And Sell](StockBuyAndSell.java)                   | Easy          | Greedy Approach                                         | [View Details](#05-stock-buy-and-sell)           |
 | 06 | [Find The Duplicate Number ](FindDuplicateNumber.java)       | Easy - Medium | Slow-fast pointer(Floyd's cycle detection) /<br/> Hashset | [View Details](#06-find-the-duplicate-number)    |
-| 07 | [Book Allocation ](./BookAllocation.java)   | Hard | Binary Search on Answer + Greedy strategy               | [View Details ](#07-book-allocation) |
-| 08 | [Aggressive Cows](./AggressiveCows.java) | Hard |  Binary Search on Answer + Greedy strategy | [View Details](#08-aggressive-cows) |
+| 07 | [Book Allocation ](./BookAllocation.java)                    | Hard | Binary Search on Answer + Greedy strategy               | [View Details ](#07-book-allocation) |
+| 08 | [Aggressive Cows](./AggressiveCows.java)                     | Hard |  Binary Search on Answer + Greedy strategy | [View Details](#08-aggressive-cows) |
+| 09 | [Majority Elements ](./MajorityElement.java)                 | Easy |  Boyer-Moore Voting Algorithm | [View Details](#09-majority-element) |
 
 ---
 
@@ -349,3 +350,42 @@ Search Range = `[1, 8]`
 - How to apply **Binary Search on Answer** instead of searching in the array
 - How to use a **greedy feasibility check (`isPossible`)** to validate a candidate distance
 - Recognizing the pattern used in problems like **Book Allocation** .
+
+---
+
+## 09. Majority Element
+
+### Problem Statement
+Given an array `nums` of size `n`, the objective is to identify the **Majority Element**. By definition, this element appears more than `⌊n / 2⌋` times in the sequence. The solution must aim for linear time complexity and constant auxiliary space.
+
+### Intuition
+The algorithm operates on the principle of **Moore's Voting Algorithm**. The core idea is that if we cancel out each occurrence of a candidate element with all other different elements, the majority element will remain as the "survivor" because its frequency is strictly greater than half of the total population.
+
+### Algorithm
+1. **Candidate Identification:**
+   - Initialize `ans` (candidate) and `freq` (counter) to 0.
+   - Iterate through the array. If `freq == 0`, assign the current element to `ans`.
+   - If the current element matches `ans`, increment `freq`; otherwise, decrement it.
+2. **Verification Step (Crucial for Integrity):**
+   - After finding the candidate, perform a second pass to count its actual occurrences (`count`).
+   - If `count > n/2`, return `ans`. Otherwise, return -1 (indicating no majority element exists).
+
+### Complexity Analysis
+* **Time Complexity:** $O(n)$ — The algorithm performs two linear scans of the array.
+* **Space Complexity:** $O(1)$ — No additional data structures are utilized, maintaining a constant memory footprint.
+
+### Example
+* **Input:** `nums = [2, 2, 1, 1, 1, 2, 2]`
+* **Execution:**
+   - `i=0`: freq=0, ans=2, freq becomes 1.
+   - `i=1`: matches ans, freq=2.
+   - `i=2`: mismatch, freq=1.
+   - `i=3`: mismatch, freq=0.
+   - `i=4`: freq=0, ans=1, freq=1.
+   - `i=5`: mismatch, freq=0.
+   - `i=6`: freq=0, ans=2, freq=1.
+* **Result:** Candidate `2` is verified with count 4 ($4 > 7/2$), returning **2**.
+
+### What I Learned
+* How the Boyer–Moore Voting Algorithm identifies a majority candidate using pairwise cancellation.
+* Why a verification step is necessary when the existence of a majority element is not guaranteed.
