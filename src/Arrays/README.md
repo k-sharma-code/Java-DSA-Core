@@ -1,4 +1,4 @@
-#  Array Masterclass: Logic & Optimization
+#  Array : Logic & Optimization
 
 A collection of high-performance Array solutions. Each problem is solved with a focus on **Edge-Case Stability** and **Optimal Complexity**.
 
