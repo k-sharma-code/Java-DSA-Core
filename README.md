@@ -7,8 +7,9 @@ This repository documents my journey through Data Structures and Algorithms. My 
 | Module                   | Core Logic & Patterns                | Problems | Status |
 |:-------------------------|:-------------------------------------|:---------|:-------|
 | [Basic](./src/Basic/)    | Java Fundamentals & Core Syntax      | --       | Ongoing |
-| [Arrays](./src/Arrays/)  | Logic Optimization & Array Mechanics | 07 / 10  | Active |
+| [Arrays](./src/Arrays/)  | Logic Optimization & Array Mechanics | 10 / 10  | Active |
 | [Sorting](./src/Sorting/)| Performance Tuning & Data Integrity  | 03 / 10  | Active |
+| [Recursion And Backtracking](./src/RecursionAndBacktracking)| Recursion Decision Making and baktraking | 01 / 10 | Active |
 
 ---
 

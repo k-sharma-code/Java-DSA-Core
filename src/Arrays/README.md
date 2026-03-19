@@ -14,6 +14,7 @@ A collection of high-performance Array solutions. Each problem is solved with a 
 | 07 | [Book Allocation ](./BookAllocation.java)                    | Hard | Binary Search on Answer + Greedy strategy               | [View Details ](#07-book-allocation) |
 | 08 | [Aggressive Cows](./AggressiveCows.java)                     | Hard |  Binary Search on Answer + Greedy strategy | [View Details](#08-aggressive-cows) |
 | 09 | [Majority Elements ](./MajorityElement.java)                 | Easy |  Boyer-Moore Voting Algorithm | [View Details](#09-majority-element) |
+| 10 | [Spiral Matrix Traversal](./SpiralMatrix.java)| Medium | Simulation (Boundary Traversal) | [View Details](#10-spiral-matrix-traversal) |
 
 ---
 
@@ -389,3 +390,46 @@ The algorithm operates on the principle of **Moore's Voting Algorithm**. The cor
 ### What I Learned
 * How the Boyer–Moore Voting Algorithm identifies a majority candidate using pairwise cancellation.
 * Why a verification step is necessary when the existence of a majority element is not guaranteed.
+
+---
+
+## 10. Spiral Matrix Traversal
+
+### Problem Statement
+Given an `m x n` matrix, the goal is to extract all its elements in a **Spiral Order**. The traversal starts from the top-left and moves clockwise, covering the outer boundaries first before moving to the inner layers.
+
+
+### Intuition
+The logic revolves around four boundaries: **stRow, endRow, stCol, and endCol**. By systematically iterating through these boundaries and shrinking them after each step (Top -> Right -> Bottom -> Left), we can visit every element in a spiral pattern.
+
+
+### Algorithm
+1. **Setup:** Identify the total rows (`m`) and columns (`n`). Initialize the starting and ending pointers for both rows and columns.
+2. **Layer Traversal:** Use a `while` loop that runs as long as the boundaries don't cross each other.
+3. **Four-Step Movement:**
+    - **Top:** Move from `stCol` to `endCol` along the `stRow`.
+    - **Right:** Move from `stRow + 1` to `endRow` along the `endCol`.
+    - **Bottom:** Move back from `endCol - 1` to `stCol` along the `endRow`.
+    - **Left:** Move up from `endRow - 1` to `stRow + 1` along the `stCol`.
+4. **Boundary Protection:** Added specific `if` checks (`stRow == endRow` and `stCol == endCol`) inside the loops to prevent duplicate printing in single-row or single-column scenarios.
+5. **Shrink:** Update all pointers to move to the next inner layer of the matrix.
+
+
+### Complexity Analysis
+- **Time Complexity:** $O(m \times n)$ — Every element in the matrix is accessed exactly once during the simulation.
+- **Space Complexity:** $O(m \times n)$ —  the space is $O(m \times n)$ to store the result in the output list. However, the **Auxiliary Space** used for boundary pointers is $O(1)$.
+
+
+### Example
+**Input (2x3 Rectangular):**
+`[[1, 2, 3], [4, 5, 6]]`  
+**Output:** `[1, 2, 3, 6, 5, 4]`
+
+**Input (3x3 Square):**
+`[[1, 2, 3], [4, 5, 6], [7, 8, 9]]`  
+**Output:** `[1, 2, 3, 6, 9, 8, 7, 4, 5]`
+
+
+### What I Learned
+- **Manual Boundary Management:** How to control multiple pointers simultaneously without overlap.
+- **Edge Case Handling:** Successfully handled unique shapes like 1x4 (Single Row) and 3x1 (Single Column) by using targeted `break` conditions.
