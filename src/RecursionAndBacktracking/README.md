@@ -3,10 +3,11 @@ comprehensive collection of algorithms focusing on recursive problem-solving, bi
 
 ## Problem Directory
 
-| #  | Problems                                         | Difficulty | Pattern                    | Documentation                 |
-|:---|:-------------------------------------------------| :--- |:---------------------------|:------------------------------|
-| 01 | [Power Set (Non-Empty subsets)](./PowerSet.java) | Medium | Backtracking (Pick & Skip) | [View Details](#01-power-set) |
-| 02 | [Count And Say](./CountAndSay.java)              | Medium | Recursion + Two Pointer Traversal | [View Details](#02-count-and-say) |
+| #  | Problems                                         | Difficulty | Pattern                    | Documentation                      |
+|:---|:-------------------------------------------------| :--- |:---------------------------|:-----------------------------------|
+| 01 | [Power Set (Non-Empty subsets)](./PowerSet.java) | Medium | Backtracking (Pick & Skip) | [View Details](#01-power-set)      |
+| 02 | [Count And Say](./CountAndSay.java)              | Medium | Recursion + Two Pointer Traversal | [View Details](#02-count-and-say)  |
+| 03 | [Tower Of Hanoi](./TowerOfHanoi.java)            |  Medium | Recursion( Devide And Conquer ) | [View Details](#03-tower-of-hanoi) |
 
 ---
 
@@ -96,3 +97,45 @@ To know what to "Say" for the current term, we must first "Look" at the previous
 - Run-Length Encoding (count + character)
 - StringBuilder for efficient string handling
 - Basic understanding of exponential growth in complexity
+
+---
+
+## 03. Tower Of Hanoi
+
+### Problem Statement
+Move `n` disks from a Source rod to a Destination rod using an Auxiliary rod, following the rule that a larger disk can never be placed on a smaller one.
+
+### Intuition
+This is a pure recursive problem where the solution for `n` disks depends on moving `n-1` disks twice. It demonstrates how a complex physical puzzle can be solved in just a few lines of code using functional decomposition.
+
+### Algorithm
+1. **Base Case:** If `n == 0`, return.
+2. **Step 1:** Recursively move `n-1` disks from `a` (Source) to `b` (Helper) using `c` (Destination).
+3. **Step 2:** Print the move for the $n^{th}$ disk from `a` to `c`.
+4. **Step 3:** Recursively move `n-1` disks from `b` (Helper) to `c` (Destination) using `a` (Source).
+
+### Complexity Analysis
+- **Time Complexity:** $O(2^n)$ — Every increment in `n` doubles the moves.
+- **Space Complexity:** $O(n)$ — Due to the depth of the recursive call stack.
+
+### Example:
+`n = 3`
+Let the rods be:
+- A → Source
+- B → Helper
+- C → Destination
+
+`Output`
+- A->C  
+- A->B  
+- C->B  
+- A->C  
+- B->A  
+- B->C  
+- A->C
+- **Total moves** The Output contains 7 Steps which matches the formula `2^n-1`,
+
+
+### What I Learned
+- **Parameter Mapping:** How the roles of rods (Source, Helper, Destination) swap during recursive calls.
+- **Subproblem Strategy:** Solving a large problem by assuming the smaller version (`n-1`) is already solved.
