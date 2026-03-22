@@ -3,11 +3,12 @@ comprehensive collection of algorithms focusing on recursive problem-solving, bi
 
 ## Problem Directory
 
-| #  | Problems                                         | Difficulty | Pattern                    | Documentation                      |
-|:---|:-------------------------------------------------| :--- |:---------------------------|:-----------------------------------|
-| 01 | [Power Set (Non-Empty subsets)](./PowerSet.java) | Medium | Backtracking (Pick & Skip) | [View Details](#01-power-set)      |
-| 02 | [Count And Say](./CountAndSay.java)              | Medium | Recursion + Two Pointer Traversal | [View Details](#02-count-and-say)  |
-| 03 | [Tower Of Hanoi](./TowerOfHanoi.java)            |  Medium | Recursion( Devide And Conquer ) | [View Details](#03-tower-of-hanoi) |
+| #  | Problems                                         | Difficulty | Pattern                                                          | Documentation                      |
+|:---|:-------------------------------------------------| :--- |:-----------------------------------------------------------------|:-----------------------------------|
+| 01 | [Power Set (Non-Empty subsets)](./PowerSet.java) | Medium | Backtracking (Pick & Skip)                                       | [View Details](#01-power-set)      |
+| 02 | [Count And Say](./CountAndSay.java)              | Medium | Recursion + Two Pointer Traversal                                | [View Details](#02-count-and-say)  |
+| 03 | [Tower Of Hanoi](./TowerOfHanoi.java)            |  Medium | Recursion( Devide And Conquer )                                  | [View Details](#03-tower-of-hanoi) |
+| 04 | [Generate Parentheses](./GenerateParentheses.java) | Medium | Backtracking (not pure recursion — uses constraints and pruning) | [View Details](#04-generate-parentheses) |
 
 ---
 
@@ -139,3 +140,38 @@ Let the rods be:
 ### What I Learned
 - **Parameter Mapping:** How the roles of rods (Source, Helper, Destination) swap during recursive calls.
 - **Subproblem Strategy:** Solving a large problem by assuming the smaller version (`n-1`) is already solved.
+
+---
+
+## 04. Generate Parentheses
+
+### Problem Statement
+Given `n` pairs of parentheses, generate all combinations of well-formed parentheses using a recursive state-space search.
+
+### Intuition
+This problem is solved using **Recursive Backtracking** within a **Constrained Decision Tree**. Instead of a brute-force approach, we prune the search space by only exploring branches that satisfy the rules of "well-formedness" (i.e., we never add a closing bracket unless an opening one is available to pair with it).
+
+### Algorithm
+1. **Base Case:** If the length of the `current` string reaches $2 \times n$, it signifies a completed valid combination. Add it to the result list and return.
+2. **Recursive Steps (Decision Rules):**
+   - **Branch 1 (Open):** If `left < n`, we can always explore adding an opening parenthesis `'('`.
+   - **Branch 2 (Close):** If `right < left`, we add a closing parenthesis `')'` to maintain the sequence's validity.
+3. **State Management:** Since Java Strings are **immutable** and passed by value, each recursive call inherently maintains its own independent state. No explicit manual backtracking (like removing a character) is required.
+
+### Complexity Analysis
+- **Time Complexity:** $O(\frac{4^n}{n\sqrt{n}})$ — The total number of valid combinations is defined by the **$n^{th}$ Catalan Number**, which asymptotically grows at this rate.
+- **Space Complexity:** $O(n)$ — The maximum depth of the recursive call stack is $n$, as we only track the current sequence's growth.
+
+### Example (n = 2)
+- State `(` -> Decisions: `((` or `()`
+- State `((` -> Decision: `(()`
+- State `(()` -> Decision: `(())` (Valid)
+- State `()` -> Decision: `()(`
+- State `()(` -> Decision: `()()` (Valid)
+
+### What I Learned
+- **Search Space Pruning:** Understanding how to restrict branches in a decision tree to avoid redundant or invalid computations.
+- **Asymptotic Growth:** Gaining insight into how the Catalan Number governs combinatorial problems like valid parentheses and binary search trees.
+- **Immutable State Handling:** Leveraging language-specific properties (String immutability) to simplify recursive logic.
+
+
