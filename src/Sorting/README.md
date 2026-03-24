@@ -9,6 +9,7 @@ This repository contains optimized sorting algorithms implemented in Java, focus
 | 01 | [Bubble Sort](./BubbleSort.java)       | Easy | Dual-State Early Exit | [View Details](#01-bubble-sort)    |
 | 02 | [Selection Sort](./SelectionSort.java) | Easy | Defensive Early Exit  | [view Details](#02-selection-sort) |
 | 03 | [Insertion Sort](./InsertionSort.java) | Easy | State Detection  | [view Details](#03-insertion-sort) |
+| 04 | [Merge Sort](./MergeSort.java) | Medium | Divide And Conquer | [View Details](#04-merge-sort) | 
 
 ---
 
@@ -136,5 +137,44 @@ Sorted array = 1 2 3 4
 ### what I learned
 - Insertion sort works by inserting elements into their correct position through shifting.
 - A state flag can be used to identify if sorting was actually required.
+
+---
+
+## 04. Merge Sort
+
+### Problem Statement
+Sort an unsorted array using the Divide and Conquer strategy. This implementation uses index-based partitioning to efficiently manage subarrays without creating new arrays.
+
+### Intuition
+Merge Sort recursively divides the array into two halves until single-element subarrays are reached. The `merge` function then combines these sorted halves back into the original array using an auxiliary space.
+
+### Algorithm
+1. **Divide:** Calculate `mid = st + (end - st) / 2` to prevent potential integer overflow.
+2. **Conquer:** Recursively invoke `mergeSort` for the left half (`st` to `mid`) and right half (`mid + 1` to `end`).
+3. **Combine (Merge):**
+    - Allocate a temporary array `temp[]` of size `end - st + 1`.
+    - Merge the two sorted halves into `temp[]` using a two-pointer approach.
+    - Copy the sorted elements from `temp[]` back to the original `arr[]` starting from index `st`.
+
+### Complexity Analysis
+- **Time Complexity:** $O(n \log n)$ — Constant division of the search space into halves ($ \log n$ levels) with linear work ($O(n)$) at each level.
+- **Space Complexity:** $O(n)$ — Not in-place. Requires auxiliary array for merging. Additionally, recursion stack uses O(log n) space.
+
+### Example
+
+**Input:**  `[38, 27, 43, 3]`
+
+- **Process:**
+- Divide → `[38, 27] | [43, 3]  
+- Sort → [27, 38] | [3, 43]
+- Merge → [3, 27, 38, 43]`
+
+**Output:**`
+[3, 27, 38, 43]`
+### What I Learned
+- **Memory Lifecycle:** Understanding that $O(n)$ space is required for merging, and recursive calls are cleaned from the stack sequentially.
+- **Robust Mid-Calculation:** Using `st + (end - st) / 2` instead of `(st + end) / 2` to handle large array indices safely.
+
+---
 
 
